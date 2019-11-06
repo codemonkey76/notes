@@ -28,7 +28,7 @@ class NotesTest extends TestCase
     public function an_unauthenticated_user_should_be_redirected_to_login()
     {
         $this->withExceptionHandling();
-        $this->post('/api/notes', array_merge($this->validData(), ['api_token' => '']))
+        $this->post('/api/notes', $this->validData())
              ->assertRedirect('/login');
         $this->assertCount(0, Note::all());
     }
@@ -39,10 +39,14 @@ class NotesTest extends TestCase
         $user = factory(User::class)->create();
         $anotherUser = factory(User::class)->create();
 
-        $note = factory(Note::class)->create(['user_id' => $user->id]);
+        $this->actingAs($anotherUser, 'api');
         $anotherNote = factory(Note::class)->create(['user_id' => $anotherUser->id]);
 
-        $this->get('/api/notes/?api_token=' . $user->api_token)
+        $this->actingAs($user, 'api');
+        $note = factory(Note::class)->create(['user_id' => $user->id]);
+
+
+        $this->get('/api/notes')
              ->assertJsonCount(1)
              ->assertJson([
                  'data' => [
@@ -70,6 +74,7 @@ class NotesTest extends TestCase
     public function an_authenticated_user_can_add_a_note()
     {
         $data = $this->validData();
+        $this->actingAs($this->user, 'api');
         $response = $this->post('/api/notes', $data);
 
         $note = Note::first();
@@ -91,6 +96,7 @@ class NotesTest extends TestCase
     function fields_are_required_on_create()
     {
         $this->withExceptionHandling();
+        $this->actingAs($this->user, 'api');
         collect(['company', 'issue'])
             ->each(function ($field) {
                 $this->post('/api/notes', array_merge($this->validData(), [$field => '']))
@@ -103,6 +109,7 @@ class NotesTest extends TestCase
     function fields_are_required_on_update()
     {
         $this->withExceptionHandling();
+        $this->actingAs($this->user, 'api');
         $this->post('/api/notes', $this->validData());
         $note = Note::first();
 
@@ -120,6 +127,7 @@ class NotesTest extends TestCase
         $note = factory(Note::class)->create(['user_id' => $this->user->id]);
         $data = $this->validData();
 
+        $this->actingAs($this->user, 'api');
         $this->patch('/api/notes/' . $note->id, $data);
 
         $note->refresh();
@@ -132,7 +140,8 @@ class NotesTest extends TestCase
     {
         $note = factory(Note::class)->create(['user_id' => $this->user->id]);
 
-        $this->get('/api/notes/' . $note->id . '?api_token=' . $this->user->api_token)
+        $this->actingAs($this->user, 'api');
+        $this->get('/api/notes/' . $note->id)
             ->assertJson([
                 'data' => [
                     'note_id' => $note->id,
@@ -154,8 +163,7 @@ class NotesTest extends TestCase
             'issue'     => $this->faker->words(4, true),
             'details'   => $this->faker->paragraph,
             'time'      => $this->faker->numberBetween(1, 120),
-            'status'    => 1,
-            'api_token' => $this->user->api_token
+            'status'    => 1
         ];
     }
 }
