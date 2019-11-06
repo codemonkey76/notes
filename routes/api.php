@@ -8,6 +8,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/notes', 'NoteController@index');
     Route::patch('/notes/{note}', 'NoteController@update');
     Route::get('/notes/{note}', 'NoteController@show');
+    Route::delete('/notes/{note}', 'NoteController@destroy');
 });
 
 

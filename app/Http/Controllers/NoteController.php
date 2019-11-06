@@ -48,6 +48,15 @@ class NoteController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    public function destroy(Note $note)
+    {
+        $this->authorize('delete', $note);
+
+        $note->delete();
+
+        return response([], Response::HTTP_NO_CONTENT);
+    }
+
     private function validateData()
     {
         return request()->validate([
