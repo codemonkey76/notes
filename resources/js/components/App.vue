@@ -9,7 +9,14 @@
                         </svg>
                     </router-link>
 
-                    <p class="uppercase font-bold text-gray-500 pt-12 text-xs">Create</p>
+                    <p class="mt-4">
+                    <router-link to="/notes" class="uppercase font-bold text-gray-500 text-xs">
+                        Notes
+                    </router-link>
+                    </p>
+                    <p>
+                    <router-link to="/notes/create" class="uppercase font-bold text-gray-500 text-xs">Create</router-link>
+                    </p>
                 </nav>
             </div>
             <router-view></router-view>
