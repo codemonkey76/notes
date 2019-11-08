@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class Note extends JsonResource
 {
@@ -24,7 +25,9 @@ class Note extends JsonResource
                 'issue'   => $this->issue,
                 'details' => nl2br($this->details),
                 'time'    => $this->time . ' minutes',
-                'created' => $this->created_at->diffForHumans()
+                'created' => $this->created_at->diffForHumans(),
+                'status' => Str::title($this->status),
+                'status_id' => $this->status_id
             ],
             'links' => [
                 'self' => $this->path()

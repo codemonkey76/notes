@@ -65,7 +65,7 @@ class NoteController extends Controller
             'issue'   => 'required',
             'details' => '',
             'time'    => 'integer',
-            'status'  => 'integer'
+            'status'  => ''
         ]);
     }
 }

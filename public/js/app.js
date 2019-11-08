@@ -1926,6 +1926,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "InputField",
   props: {
@@ -1940,7 +1948,8 @@ __webpack_require__.r(__webpack_exports__);
     rows: {
       type: String,
       "default": "5"
-    }
+    },
+    options: {}
   },
   data: function data() {
     return {
@@ -1948,9 +1957,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    updateField: function updateField() {
+    titleCase: function titleCase(str) {
+      return str[0].toUpperCase() + str.slice(1);
+    },
+    updateField: function updateField(event) {
       this.clearErrors(this.name);
-      this.$emit('update:field', this.value);
+      this.$emit('update:field', event.target.value);
     },
     errorMessage: function errorMessage() {
       if (this.hasError) {
@@ -2033,12 +2045,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotesCreate",
   components: {
     InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: ['statuses'],
   data: function data() {
     return {
       errors: null,
@@ -2046,7 +2067,9 @@ __webpack_require__.r(__webpack_exports__);
         company: '',
         contact: '',
         issue: '',
-        details: ''
+        details: '',
+        status: '',
+        time: '1'
       }
     };
   },
@@ -2106,6 +2129,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       notes: null,
+      statuses: null,
       loading: true
     };
   },
@@ -2116,12 +2140,17 @@ __webpack_require__.r(__webpack_exports__);
     load: function load() {
       var _this = this;
 
-      axios.get('/api/notes').then(function (response) {
-        _this.notes = response.data.data;
-        _this.loading = false;
-      })["catch"](function (error) {
-        alert('Could not retrieve any notes.');
-        _this.loading = false;
+      axios.get('/api/status').then(function (response) {
+        _this.statuses = response.data;
+        axios.get('/api/notes').then(function (response) {
+          _this.notes = response.data.data;
+          _this.loading = false;
+        })["catch"](function () {
+          alert('Could not retrieve any notes.');
+          _this.loading = false;
+        });
+      })["catch"](function () {
+        alert('Could not retrieve statuses.');
       });
     },
     noteCreated: function noteCreated(event) {
@@ -2153,10 +2182,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotesShow",
   props: ['note'],
-  data: function data() {}
+  data: function data() {
+    return {};
+  }
 });
 
 /***/ }),
@@ -3443,6 +3475,7 @@ var render = function() {
       "label",
       {
         staticClass: "absolute text-blue-500 uppercase font-bold text-xs pt-2",
+        class: { "-mt-6": _vm.type === "select" },
         attrs: { for: _vm.name }
       },
       [_vm._v("\n        " + _vm._s(_vm.label) + "\n    ")]
@@ -3504,6 +3537,50 @@ var render = function() {
             ]
           }
         })
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.type === "select"
+      ? _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value"
+              }
+            ],
+            staticClass:
+              "block mt-6 appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+            attrs: { id: _vm.name },
+            on: {
+              input: _vm.updateField,
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.value = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _vm._v("\n         >\n        "),
+            _vm._l(_vm.options, function(option, key) {
+              return _c("option", { domProps: { value: option } }, [
+                _vm._v(_vm._s(_vm.titleCase(option)))
+              ])
+            })
+          ],
+          2
+        )
       : _vm._e(),
     _vm._v(" "),
     _c("p", {
@@ -3595,11 +3672,25 @@ var render = function() {
             placeholder: "Enter the job details",
             errors: _vm.errors,
             type: "textarea",
-            rows: "10"
+            rows: "4"
           },
           on: {
             "update:field": function($event) {
               _vm.form.details = $event
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input-field", {
+          attrs: {
+            name: "status",
+            label: "status",
+            type: "select",
+            options: _vm.statuses
+          },
+          on: {
+            "update:field": function($event) {
+              _vm.form.status = $event
             }
           }
         }),
@@ -3671,6 +3762,7 @@ var render = function() {
           [
             _c("notes-create", {
               staticClass: "p-2 mb-2 rounded shadow bg-white",
+              attrs: { statuses: _vm.statuses },
               on: {
                 "note:created": function($event) {
                   return _vm.noteCreated($event)
@@ -3733,9 +3825,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "flex justify-between pb-2 items-center" }, [
-      _c("span", { staticClass: "font-bold" }, [
+      _c("span", [
+        _c("strong", [_vm._v("Company: ")]),
         _vm._v(_vm._s(_vm.note.data.company))
       ]),
+      _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.note.data.status))]),
       _vm._v(" "),
       _c("span", { staticClass: "text-gray-500 uppercase text-sm" }, [
         _vm._v(_vm._s(_vm.note.data.created))

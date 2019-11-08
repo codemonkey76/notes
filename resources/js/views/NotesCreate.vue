@@ -31,8 +31,16 @@
                     placeholder="Enter the job details"
                     :errors="errors"
                     type="textarea"
-                    rows="10"
+                    rows="4"
                     @update:field="form.details = $event"
+            />
+
+            <input-field
+                name="status"
+                label="status"
+                type="select"
+                :options="statuses"
+                @update:field="form.status = $event"
             />
             <div class="flex justify-end">
                 <button class="flex items-center border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline font-bold px-3 py-2 rounded shadow">
@@ -50,6 +58,7 @@
     export default {
         name: "NotesCreate",
         components: {InputField},
+        props: ['statuses'],
         data() {
             return {
                 errors: null,
@@ -57,7 +66,9 @@
                     company:'',
                     contact: '',
                     issue: '',
-                    details: ''
+                    details: '',
+                    status: '',
+                    time: '1',
                 }
             }
         },

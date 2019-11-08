@@ -2,7 +2,7 @@
     <div class="p-2 flex-1 bg-gray-200">
         <div v-if="loading">Loading...</div>
         <div class="h-screen overflow-y-auto" v-else>
-            <notes-create class="p-2 mb-2 rounded shadow bg-white" @note:created="noteCreated($event)"></notes-create>
+            <notes-create class="p-2 mb-2 rounded shadow bg-white" @note:created="noteCreated($event)" :statuses="statuses"></notes-create>
             <div v-if="notes.length===0">
                 No notes yet.
                 <router-link to="/notes/create" class="text-blue-500">Get started ></router-link>
@@ -27,6 +27,7 @@
         data() {
             return {
                 notes: null,
+                statuses: null,
                 loading: true
             }
         },
@@ -35,14 +36,21 @@
         },
         methods: {
             load() {
-                axios.get('/api/notes')
+                axios.get('/api/status')
                     .then(response => {
-                        this.notes = response.data.data;
+                        this.statuses = response.data;
+                        axios.get('/api/notes')
+                            .then(response => {
 
-                        this.loading = false;
-                    }).catch(error => {
-                    alert('Could not retrieve any notes.');
-                    this.loading = false;
+                                this.notes = response.data.data;
+
+                                this.loading = false;
+                            }).catch(() => {
+                            alert('Could not retrieve any notes.');
+                            this.loading = false;
+                        });
+                    }).catch(() => {
+                    alert('Could not retrieve statuses.');
                 });
             },
             noteCreated(event) {

@@ -1,7 +1,8 @@
 <template>
     <div class="relative pb-4">
         <label :for="name"
-               class="absolute text-blue-500 uppercase font-bold text-xs pt-2">
+               class="absolute text-blue-500 uppercase font-bold text-xs pt-2"
+                :class="{'-mt-6': type==='select'}">
             {{ label }}
         </label>
         <textarea
@@ -22,6 +23,13 @@
                :placeholder="placeholder"
                v-model="value"
                @input="updateField">
+        <select v-if="type==='select'"
+                :id="name"
+                class="block mt-6 appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        v-model="value" @input="updateField">
+             >
+            <option v-for="(option,key) in options" :value="option">{{titleCase(option)}}</option>
+        </select>
         <p class="text-red-600 text-sm" v-text="errorMessage()"></p>
     </div>
 </template>
@@ -42,7 +50,8 @@
             rows: {
                 type: String,
                 default: "5"
-            }
+            },
+            options: {}
         },
         data() {
             return {
@@ -51,10 +60,13 @@
         },
 
         methods: {
-            updateField() {
+            titleCase(str) {
+                return str[0].toUpperCase() + str.slice(1);
+            },
+            updateField(event) {
                 this.clearErrors(this.name);
 
-                this.$emit('update:field', this.value)
+                this.$emit('update:field', event.target.value)
             },
 
             errorMessage() {

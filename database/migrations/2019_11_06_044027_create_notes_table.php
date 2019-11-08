@@ -19,7 +19,7 @@ class CreateNotesTable extends Migration
             $table->string('contact')->nullable();
             $table->string('issue');
             $table->longText('details')->nullable();
-            $table->unsignedInteger('time')->default(1);
+            $table->unsignedInteger('time') ->default(1);
             $table->unsignedInteger('status')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

@@ -67,7 +67,7 @@ class NotesTest extends TestCase
         $this->assertEquals($data['issue'], $note->issue);
         $this->assertEquals($data['details'], $note->details);
         $this->assertEquals($data['time'], $note->time);
-        $this->assertEquals($data['status'], $note->status);
+        $this->assertEquals($data['status'], $note->status_id);
     }
 
     /** @test */
