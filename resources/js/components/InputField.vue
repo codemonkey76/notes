@@ -11,7 +11,7 @@
                 class="text-gray-900 pt-8 w-full border-b pb-2 focus:outline-none focus:border-blue-400"
                 :class="errorClassObject()"
                 :placeholder="placeholder"
-                v-model="value"
+                v-model="state"
                 @input="updateField"
                 :rows="rows"
         ></textarea>
@@ -21,12 +21,12 @@
                class="text-gray-900 pt-8 w-full border-b pb-2 focus:outline-none focus:border-blue-400"
                :class="errorClassObject()"
                :placeholder="placeholder"
-               v-model="value"
+               v-model="state"
                @input="updateField">
         <select v-if="type==='select'"
                 :id="name"
                 class="block mt-6 appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        v-model="value" @input="updateField">
+        v-model="state" @input="updateField">
              >
             <option v-for="(option,key) in options" :value="option">{{titleCase(option)}}</option>
         </select>
@@ -51,14 +51,19 @@
                 type: String,
                 default: "5"
             },
-            options: {}
+            options: {},
+            value: {}
         },
         data() {
             return {
-                value: ''
+                state: this.value
             }
         },
-
+        watch: {
+            value(val) {
+                this.state = val;
+            }
+        },
         methods: {
             titleCase(str) {
                 return str[0].toUpperCase() + str.slice(1);
@@ -66,7 +71,7 @@
             updateField(event) {
                 this.clearErrors(this.name);
 
-                this.$emit('update:field', event.target.value)
+                this.$emit('input', event.target.value)
             },
 
             errorMessage() {

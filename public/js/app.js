@@ -1949,12 +1949,18 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": "5"
     },
-    options: {}
+    options: {},
+    value: {}
   },
   data: function data() {
     return {
-      value: ''
+      state: this.value
     };
+  },
+  watch: {
+    value: function value(val) {
+      this.state = val;
+    }
   },
   methods: {
     titleCase: function titleCase(str) {
@@ -1962,7 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateField: function updateField(event) {
       this.clearErrors(this.name);
-      this.$emit('update:field', event.target.value);
+      this.$emit('input', event.target.value);
     },
     errorMessage: function errorMessage() {
       if (this.hasError) {
@@ -2053,6 +2059,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotesCreate",
@@ -2063,22 +2072,30 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       errors: null,
-      form: {
+      form: this.clearForm()
+    };
+  },
+  mounted: function mounted() {
+    this.clearForm();
+  },
+  methods: {
+    clearForm: function clearForm() {
+      return {
         company: '',
         contact: '',
         issue: '',
         details: '',
-        status: '',
+        status: 'open',
         time: '1'
-      }
-    };
-  },
-  methods: {
+      };
+    },
     submitForm: function submitForm() {
       var _this = this;
 
       axios.post('/api/notes', this.form).then(function (response) {
         _this.$emit('note:created', response.data);
+
+        _this.form = _this.clearForm();
       })["catch"](function (errors) {
         _this.errors = errors.response.data.errors;
       });
@@ -2188,7 +2205,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['note'],
   data: function data() {
     return {};
-  }
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -3487,22 +3505,22 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.value,
-              expression: "value"
+              value: _vm.state,
+              expression: "state"
             }
           ],
           staticClass:
             "text-gray-900 pt-8 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
           class: _vm.errorClassObject(),
           attrs: { id: _vm.name, placeholder: _vm.placeholder, rows: _vm.rows },
-          domProps: { value: _vm.value },
+          domProps: { value: _vm.state },
           on: {
             input: [
               function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.value = $event.target.value
+                _vm.state = $event.target.value
               },
               _vm.updateField
             ]
@@ -3516,22 +3534,22 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.value,
-              expression: "value"
+              value: _vm.state,
+              expression: "state"
             }
           ],
           staticClass:
             "text-gray-900 pt-8 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
           class: _vm.errorClassObject(),
           attrs: { id: _vm.name, type: "text", placeholder: _vm.placeholder },
-          domProps: { value: _vm.value },
+          domProps: { value: _vm.state },
           on: {
             input: [
               function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.value = $event.target.value
+                _vm.state = $event.target.value
               },
               _vm.updateField
             ]
@@ -3547,8 +3565,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.value,
-                expression: "value"
+                value: _vm.state,
+                expression: "state"
               }
             ],
             staticClass:
@@ -3565,7 +3583,7 @@ var render = function() {
                     var val = "_value" in o ? o._value : o.value
                     return val
                   })
-                _vm.value = $event.target.multiple
+                _vm.state = $event.target.multiple
                   ? $$selectedVal
                   : $$selectedVal[0]
               }
@@ -3630,10 +3648,12 @@ var render = function() {
             placeholder: "Company name",
             errors: _vm.errors
           },
-          on: {
-            "update:field": function($event) {
-              _vm.form.company = $event
-            }
+          model: {
+            value: _vm.form.company,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "company", $$v)
+            },
+            expression: "form.company"
           }
         }),
         _vm._v(" "),
@@ -3644,10 +3664,12 @@ var render = function() {
             placeholder: "Contact name",
             errors: _vm.errors
           },
-          on: {
-            "update:field": function($event) {
-              _vm.form.contact = $event
-            }
+          model: {
+            value: _vm.form.contact,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "contact", $$v)
+            },
+            expression: "form.contact"
           }
         }),
         _vm._v(" "),
@@ -3658,10 +3680,12 @@ var render = function() {
             placeholder: "What's the issue?",
             errors: _vm.errors
           },
-          on: {
-            "update:field": function($event) {
-              _vm.form.issue = $event
-            }
+          model: {
+            value: _vm.form.issue,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "issue", $$v)
+            },
+            expression: "form.issue"
           }
         }),
         _vm._v(" "),
@@ -3674,10 +3698,12 @@ var render = function() {
             type: "textarea",
             rows: "4"
           },
-          on: {
-            "update:field": function($event) {
-              _vm.form.details = $event
-            }
+          model: {
+            value: _vm.form.details,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "details", $$v)
+            },
+            expression: "form.details"
           }
         }),
         _vm._v(" "),
@@ -3688,10 +3714,12 @@ var render = function() {
             type: "select",
             options: _vm.statuses
           },
-          on: {
-            "update:field": function($event) {
-              _vm.form.status = $event
-            }
+          model: {
+            value: _vm.form.status,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "status", $$v)
+            },
+            expression: "form.status"
           }
         }),
         _vm._v(" "),
