@@ -22,7 +22,7 @@ class Note extends JsonResource
                 'company' => $this->company,
                 'contact' => $this->contact,
                 'issue'   => $this->issue,
-                'details' => $this->details,
+                'details' => nl2br($this->details),
                 'time'    => $this->time . ' minutes',
                 'created' => $this->created_at->diffForHumans()
             ],
