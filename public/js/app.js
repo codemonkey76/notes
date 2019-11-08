@@ -2116,6 +2116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2153,6 +2154,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     noteCreated: function noteCreated(event) {
       this.notes.unshift(event);
+    },
+    noteDeleted: function noteDeleted(key) {
+      this.notes.splice(key, 1);
     }
   }
 });
@@ -2181,13 +2185,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotesShow",
   props: ['note'],
   data: function data() {
     return {};
   },
-  methods: {}
+  methods: {
+    deleteNote: function deleteNote() {
+      var _this = this;
+
+      axios["delete"]('/api/notes/' + this.note.data.note_id).then(function () {
+        _this.$emit('note:remove', _this.note.data.note_id);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3669,13 +3691,13 @@ var render = function() {
             "button",
             {
               staticClass:
-                "flex items-center border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline font-bold px-3 py-2 rounded shadow"
+                "flex text-sm items-center border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline font-bold px-2 py-1 rounded shadow"
             },
             [
               _c(
                 "svg",
                 {
-                  staticClass: "w-6 mr-2",
+                  staticClass: "w-4 mr-2",
                   attrs: {
                     xmlns: "http://www.w3.org/2000/svg",
                     viewBox: "0 0 512 512"
@@ -3762,7 +3784,12 @@ var render = function() {
                 key: key,
                 staticClass:
                   "rounded p-2 mb-2 bg-white border shadow text-gray-900",
-                attrs: { note: note }
+                attrs: { note: note },
+                on: {
+                  "note:remove": function($event) {
+                    return _vm.noteDeleted(key)
+                  }
+                }
               })
             })
           ],
@@ -3819,7 +3846,40 @@ var render = function() {
     _c("p", {
       staticClass: "whitespace-pre-wrap",
       domProps: { innerHTML: _vm._s(_vm.note.data.details) }
-    })
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "text-sm flex items-center border border-red-500 text-red-500 hover:bg-red-500 hover:text-white focus:outline-none focus:shadow-outline font-bold px-2 py-1 rounded shadow",
+          on: { click: _vm.deleteNote }
+        },
+        [
+          _c(
+            "svg",
+            {
+              staticClass: "w-4 mr-2",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 448 512"
+              }
+            },
+            [
+              _c("path", {
+                attrs: {
+                  fill: "currentColor",
+                  d:
+                    "M32 464a48 48 0 0048 48h288a48 48 0 0048-48V128H32zm272-256a16 16 0 0132 0v224a16 16 0 01-32 0zm-96 0a16 16 0 0132 0v224a16 16 0 01-32 0zm-96 0a16 16 0 0132 0v224a16 16 0 01-32 0zM432 32H312l-9.4-18.7A24 24 0 00281.1 0H166.8a23.72 23.72 0 00-21.4 13.3L136 32H16A16 16 0 000 48v32a16 16 0 0016 16h416a16 16 0 0016-16V48a16 16 0 00-16-16z"
+                }
+              })
+            ]
+          ),
+          _vm._v("\n            Delete Note\n        ")
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

@@ -12,6 +12,7 @@
                         v-for="(note,key) in notes"
                         :note="note"
                         :key="key"
+                        @note:remove="noteDeleted(key)"
             />
         </div>
     </div>
@@ -55,6 +56,9 @@
             },
             noteCreated(event) {
                 this.notes.unshift(event);
+            },
+            noteDeleted(key) {
+                this.notes.splice(key, 1);
             }
         }
     }
