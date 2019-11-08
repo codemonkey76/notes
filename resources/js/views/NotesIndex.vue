@@ -1,7 +1,7 @@
 <template>
     <div class="p-2 flex-1 bg-gray-200">
         <div v-if="loading">Loading...</div>
-        <div class="h-screen overflow-y-auto" v-else>
+        <div class="md:h-screen md:overflow-y-auto" v-else>
             <notes-create class="p-2 mb-2 rounded shadow bg-white" @note:created="noteCreated($event)" :statuses="statuses"></notes-create>
             <div v-if="notes.length===0">
                 No notes yet.
