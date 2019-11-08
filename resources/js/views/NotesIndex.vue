@@ -5,7 +5,6 @@
             <notes-create class="p-2 mb-2 rounded shadow bg-white" @note:created="noteCreated($event)" :statuses="statuses"></notes-create>
             <div v-if="notes.length===0">
                 No notes yet.
-                <router-link to="/notes/create" class="text-blue-500">Get started ></router-link>
             </div>
 
             <notes-show class="rounded p-2 mb-2 bg-white border shadow text-gray-900"

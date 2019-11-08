@@ -2116,7 +2116,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3367,18 +3366,18 @@ var render = function() {
   return _c("div", { staticClass: "h-screen bg-white" }, [
     _c(
       "div",
-      { staticClass: "flex" },
+      { staticClass: "flex flex-col md:flex-row" },
       [
         _c(
           "div",
           {
             staticClass:
-              "pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400"
+              "pl-6 bg-gray-200 md:w-32 md:h-screen border-b-2 md:border-b-0 md:border-r-2 border-gray-400"
           },
           [
             _c(
               "nav",
-              { staticClass: "pt-4" },
+              { staticClass: "md:block flex items-center py-4" },
               [
                 _c("router-link", { attrs: { to: "/" } }, [
                   _c(
@@ -3403,7 +3402,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  { staticClass: "mt-4" },
+                  { staticClass: "ml-4 md:ml-0 md:mt-4" },
                   [
                     _c(
                       "router-link",
@@ -3762,21 +3761,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _vm.notes.length === 0
-              ? _c(
-                  "div",
-                  [
-                    _vm._v("\n            No notes yet.\n            "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "text-blue-500",
-                        attrs: { to: "/notes/create" }
-                      },
-                      [_vm._v("Get started >")]
-                    )
-                  ],
-                  1
-                )
+              ? _c("div", [_vm._v("\n            No notes yet.\n        ")])
               : _vm._e(),
             _vm._v(" "),
             _vm._l(_vm.notes, function(note, key) {
@@ -19339,8 +19324,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/shane/Code/notes/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/shane/Code/notes/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/shanepoppleton/Documents/Code/notes/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/shanepoppleton/Documents/Code/notes/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
