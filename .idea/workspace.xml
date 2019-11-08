@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71a7860c-759b-4573-8129-5618cd47b7e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/NotesCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/NotesCreate.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +173,7 @@
       <workItem from="1573168702861" duration="496000" />
       <workItem from="1573174045970" duration="12672000" />
       <workItem from="1573254109825" duration="157000" />
-      <workItem from="1573254990527" duration="151000" />
+      <workItem from="1573254990527" duration="455000" />
     </task>
     <servers />
   </component>

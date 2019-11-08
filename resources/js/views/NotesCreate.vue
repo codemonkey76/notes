@@ -36,6 +36,14 @@
             />
 
             <input-field
+                name="time"
+                label="time (mins)"
+                placeholder="Enter the time spent"
+                :errors="errors"
+                v-model="form.time"
+            />
+
+            <input-field
                     name="status"
                     label="status"
                     type="select"

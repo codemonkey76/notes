@@ -2043,6 +2043,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotesCreate",
@@ -2171,6 +2179,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -3671,6 +3680,22 @@ var render = function() {
         _vm._v(" "),
         _c("input-field", {
           attrs: {
+            name: "time",
+            label: "time (mins)",
+            placeholder: "Enter the time spent",
+            errors: _vm.errors
+          },
+          model: {
+            value: _vm.form.time,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "time", $$v)
+            },
+            expression: "form.time"
+          }
+        }),
+        _vm._v(" "),
+        _c("input-field", {
+          attrs: {
             name: "status",
             label: "status",
             type: "select",
@@ -3832,6 +3857,8 @@ var render = function() {
       staticClass: "whitespace-pre-wrap",
       domProps: { innerHTML: _vm._s(_vm.note.data.details) }
     }),
+    _vm._v(" "),
+    _c("p", { domProps: { textContent: _vm._s(_vm.note.data.time) } }),
     _vm._v(" "),
     _c("div", { staticClass: "flex justify-end" }, [
       _c(

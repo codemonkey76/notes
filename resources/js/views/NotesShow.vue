@@ -9,6 +9,7 @@
         <div><strong>Issue: </strong>{{note.data.issue}}</div>
         <p class="whitespace-pre-wrap" v-html="note.data.details"/>
 
+        <p v-text="note.data.time"/>
         <div class="flex justify-end">
             <button @click="deleteNote" class="text-sm flex items-center border border-red-500 text-red-500 hover:bg-red-500 hover:text-white focus:outline-none focus:shadow-outline font-bold px-2 py-1 rounded shadow">
                 <svg class="w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
