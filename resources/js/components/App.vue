@@ -13,7 +13,7 @@
                     <router-link to="/notes" class="uppercase font-bold text-gray-500 text-xs">
                         Notes
                     </router-link>
-                    <!--</p>-->
+                    </p>
                     <!--<p>-->
                     <!--<router-link to="/notes/create" class="uppercase font-bold text-gray-500 text-xs">Create</router-link>-->
                     <!--</p>-->
