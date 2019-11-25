@@ -41,7 +41,6 @@
                         this.statuses = response.data;
                         axios.get('/api/notes')
                             .then(response => {
-
                                 this.notes = response.data.data;
 
                                 this.loading = false;

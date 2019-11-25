@@ -13,8 +13,9 @@ class NoteController extends Controller
     public function store()
     {
         $this->authorize('create', Note::class);
-
-        $note = request()->user()->notes()->create($this->validateData());
+        $data = $this->validateData();
+        $data['group_id'] = request()->user()->group_id;
+        $note = request()->user()->notes()->create($data);
 
         return (new NoteResource($note))
             ->response()
@@ -24,8 +25,7 @@ class NoteController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Note::class);
-
-        return NoteResource::collection(request()->user()->notes);
+        return NoteResource::collection(request()->user()->group->notes()->latest()->get());
     }
 
     public function update(Note $note)

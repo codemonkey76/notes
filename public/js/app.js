@@ -3768,12 +3768,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2 flex-1 bg-gray-200" }, [
+  return _c("div", { staticClass: "flex-1 bg-gray-200" }, [
     _vm.loading
       ? _c("div", [_vm._v("Loading...")])
       : _c(
           "div",
-          { staticClass: "h-screen overflow-y-auto" },
+          { staticClass: "md:h-screen md:overflow-y-auto" },
           [
             _c("notes-create", {
               staticClass: "p-2 mb-2 rounded shadow bg-white",
@@ -19351,8 +19351,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/shanepoppleton/Documents/Code/notes/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/shanepoppleton/Documents/Code/notes/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Volumes/Development/laravel/notes/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Volumes/Development/laravel/notes/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

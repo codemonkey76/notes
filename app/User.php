@@ -42,4 +42,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class)->latest();
     }
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
