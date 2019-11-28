@@ -3831,15 +3831,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "flex justify-between pb-2 items-center" }, [
-      _c("span", [
+      _c("span", { staticClass: "flex-1" }, [
         _c("strong", [_vm._v("Company: ")]),
         _vm._v(_vm._s(_vm.note.data.company))
       ]),
       _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.note.data.status))]),
+      _c("span", { staticClass: "flex-1" }, [
+        _vm._v(_vm._s(_vm.note.data.status))
+      ]),
       _vm._v(" "),
-      _c("span", { staticClass: "text-gray-500 uppercase text-sm" }, [
-        _vm._v(_vm._s(_vm.note.data.created))
+      _c("span", { staticClass: "flex-1 text-gray-500 uppercase text-sm" }, [
+        _c("strong", [_vm._v("Created by: " + _vm._s(_vm.note.data.creator))]),
+        _vm._v(" " + _vm._s(_vm.note.data.created))
       ])
     ]),
     _vm._v(" "),

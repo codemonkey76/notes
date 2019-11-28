@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="flex justify-between pb-2 items-center">
-            <span><strong>Company: </strong>{{note.data.company}}</span>
-            <span>{{note.data.status}}</span>
-            <span class="text-gray-500 uppercase text-sm">{{note.data.created}}</span>
+            <span class="flex-1"><strong>Company: </strong>{{note.data.company}}</span>
+            <span class="flex-1">{{note.data.status}}</span>
+            <span class="flex-1 text-gray-500 uppercase text-sm"><strong>Created by: {{note.data.creator}}</strong> {{note.data.created}}</span>
         </div>
         <div><strong>Contact: </strong>{{note.data.contact}}</div>
         <div><strong>Issue: </strong>{{note.data.issue}}</div>

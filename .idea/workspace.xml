@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="71a7860c-759b-4573-8129-5618cd47b7e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Note.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Note.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Note.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Note.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/NotesIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/NotesIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/NotesTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/NotesTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/NotesShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/NotesShow.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +177,8 @@
       <workItem from="1573174045970" duration="12672000" />
       <workItem from="1573254109825" duration="157000" />
       <workItem from="1573254990527" duration="1008000" />
-      <workItem from="1574643505472" duration="3186000" />
+      <workItem from="1574643505472" duration="3562000" />
+      <workItem from="1574900645476" duration="633000" />
     </task>
     <servers />
   </component>
